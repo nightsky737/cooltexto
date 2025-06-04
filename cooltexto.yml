@@ -1,0 +1,20 @@
+
+openapi: 3.0.0
+info:
+  title: "RP Flask REST API"
+  description: "Contexto game!"
+  version: "1.0.0"
+#comments are like this. We're probably going to need a lot of these.
+servers:
+  - url: "/api"
+
+paths: 
+  /generator:
+    get:
+      operationId: "generator.guess"  
+      tags:
+        - "Guess" 
+      summary: "Guesses a word"  
+      responses: 
+        "200":
+          description: "Guess successful"  
