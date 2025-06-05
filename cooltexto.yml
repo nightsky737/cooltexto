@@ -9,7 +9,7 @@ servers:
   - url: "/api"
 
 paths: 
-  /generator:
+  /generator/{guess}:
     get:
       operationId: "generator.guess"  
       tags:
@@ -17,4 +17,11 @@ paths:
       summary: "Guesses a word"  
       responses: 
         "200":
-          description: "Guess successful"  
+          description: "Guess successful"
+  /generator:
+    get:
+      operationId: "generator.generate_orderings"
+      summary: "Sets the word for a user"
+      responses:
+        "200":
+          description: "Guess generated"  
