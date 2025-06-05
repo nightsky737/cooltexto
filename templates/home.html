@@ -17,5 +17,22 @@
 <input type="text" id="guess" name = "guess" placeholder="Type ur guess!">
 </form>
     </p>
+
+<p id="guessResponse">Js testing button below</p>
+
+<input id="guess2" placeholder="Type ur guess!">
+
+<button type="button" onclick="myFunction()">Try guess (raw js)</button>
+
+<script>
+function myFunction() {
+  let guess = document.getElementById("guess2").value;
+  let ret = "ur guess bad";
+  if(guess =="bear" ){
+    ret = "your guess is good"
+  }
+  document.getElementById("guessResponse").innerHTML = ret;
+}
+</script>
 </body>
 </html>    
