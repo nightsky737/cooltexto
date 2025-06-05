@@ -8,13 +8,25 @@ info:
 servers:
   - url: "/api"
 
+components:
+  parameters:
+    guess:
+      name: guess #Needs a name and where its in. Schema i guess tells it what in fo it needs to have
+      in: path #Path is in url, query goes after a ?
+      schema:
+        type: "string" 
+      required: true
+      description: "guess"
+
 paths: 
   /generator/{guess}:
-    get:
+    post:
       operationId: "generator.guess"  
       tags:
         - "Guess" 
       summary: "Guesses a word"  
+      parameters:  
+        - $ref: "#/components/parameters/guess"
       responses: 
         "200":
           description: "Guess successful"

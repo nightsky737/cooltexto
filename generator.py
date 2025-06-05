@@ -1,9 +1,10 @@
 #session['smth'] = 'smth' makes it for the browser tab
-import flask
+from flask import *
 import numpy as np
 import os 
 import random
 from numpy import linalg as LA
+
 
 os.chdir("word_data") #crappy way to do it.
 
@@ -65,9 +66,17 @@ def generate_orderings(debug=False):
     if debug:
         print(f"generating for {word}")
     ret = order(word)
-    flask.session['current_ordering'] = ret
+    session['current_ordering'] = ret
+    print("Setting session ordering with", len(ret), "items")
+
     return ret
 
 def guess(guess):
-    '''Guesses the guess'''
-    return flask.session['current_ordering'][guess]
+    ordering = session.get('current_ordering')
+    if not ordering:
+        abort(400, description="No ordering found. Generate one first.")
+
+    if guess not in ordering:
+        abort(400, description=f"'{guess}' not found in ordering.")
+
+    return ordering[guess]
