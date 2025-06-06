@@ -6,7 +6,19 @@
 </head>
 <body>
     <p> Hi world</p>
-    <button onclick="document.body.style.background = 'red'";
->ooh clicky clicky</button>
+    <button onclick="document.body.style.background = 'red'";>ooh clicky clicky</button>
+    
+    <p id="guessResponse"></p>
+    
+<script>
+function myFunction() {
+  let guess = document.getElementById("guess").value;
+  let ret = "ur guess bad";
+  if(guess =="bear" ){
+    ret = "your guess is good"
+  }
+  document.getElementById("guessResponse").innerHTML = text;
+}
+</script>
 </body>
-</html> 
+</html>

@@ -1,5 +1,6 @@
 #Main app
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import generator
 from flask_session import Session
 import redis
 import connexion
@@ -18,7 +19,14 @@ Session(flask_app)
 
 @app.route("/") 
 def home():
+    generator.generate_orderings()
     return render_template("home.html")  
+
+@app.route("/guess", methods=["POST"])
+def guess():
+    if request.method == 'POST':
+        guess_rank=generator.guess(request.form.get("guess"))
+        return render_template("guess.html", guess=request.form.get("guess"), guess_ranking=guess_rank) 
  
 if __name__ == "__main__":
     app.run(port=8000, debug=True)   

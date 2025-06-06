@@ -78,5 +78,6 @@ def guess(guess):
 
     if guess not in ordering:
         abort(400, description=f"'{guess}' not found in ordering.")
-
+   
+   
     return ordering[guess]
