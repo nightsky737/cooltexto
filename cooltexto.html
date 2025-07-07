@@ -9,7 +9,7 @@
 </head>
 <script>
   let api_url = 'http://localhost:8000/generate'; 
-  var word 
+  var word;
   fetch(api_url)
   .then(response => response.json())
   .then(data => {document.getElementById("title").textContent = "Cooltexto!! Secret word: " + data.word})
@@ -25,37 +25,17 @@
   <button type="submit">Submit</button>
 </form>
 
-<p id="result"></p>
+<p id="result">idk</p>
 
 <script>
   document.getElementById('makeGuess').addEventListener('submit', function(event) {
     event.preventDefault();  
+    
+    guessWord(document.getElementById("userGuess").value)
+    });
 
-    const userInput = document.getElementById('userGuess').value;
-    console.log("User entered:", userInput);
+function guessWord(word){
 
-    document.getElementById('result').textContent = "You entered: " + userInput;
-
-    // OPTIONAL: you can do a fetch() here instead!
-  });
-</script>
-
-<p>Stuff that is old and shitty</p>
-
-
-    <p>
-
-<input type="text" id="guess" name = "guess" placeholder="Type ur guess!">
-</form> 
-    </p>
-
-<p id="guessResponse">Js testing button below</p>
-
-<button type="button" onclick="guessWord()">Type your guess!</button>
-
-<script>
-
-function guessWord(){
       let api_url = 'http://localhost:8000/api/guess'; 
         fetch(api_url, {
         method: 'POST',
@@ -63,7 +43,7 @@ function guessWord(){
           'Content-Type': 'application/json', //basically tells it yo im giving u a json give me back a json
         "Accept": "application/json"
         },
-    body: JSON.stringify({guess : document.getElementById("guessResponse").value})
+    body: JSON.stringify({ guess: word })
     })
     /*Callback: Fxn that is passed to another fxn to be executed whenever or upon specific event happenign
      Chaining is when 2 or more async operations back to back. Promise chain here.
@@ -76,11 +56,12 @@ function guessWord(){
      Once settled, a fxn will be called depending on whether or not it had been fulfilled or rejected
     */ 
     .then(response => response.json())
-    .then(data => JSON.parse(data))
     .then(data => {
-        document.getElementById('output').textContent = data.rank;
+    document.getElementById('result').textContent = "Your guess was" + word + "was rank " + data.rank;
       })
       .catch(error => console.error('Error:', error));
+
+      return "";
     }
 </script>
 </body>
