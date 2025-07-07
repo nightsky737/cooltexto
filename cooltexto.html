@@ -7,35 +7,56 @@
     <meta charset="UTF-8">
     <title>Cooler Contexto</title>
 </head>
+<script>
+  let api_url = 'http://localhost:8000/generate'; 
+  var word 
+  fetch(api_url)
+  .then(response => response.json())
+  .then(data => {document.getElementById("title").textContent = "Cooltexto!! Secret word: " + data.word})
+
+</script>
+
 <body>
-    <h1> 
-        CoolTexto!!!
+    <h1 id="title"> 
     </h1>
+
+<form id="makeGuess">
+  <input type="text" id="userGuess" placeholder="Type ur guess" required>
+  <button type="submit">Submit</button>
+</form>
+
+<p id="result"></p>
+
+<script>
+  document.getElementById('makeGuess').addEventListener('submit', function(event) {
+    event.preventDefault();  
+
+    const userInput = document.getElementById('userGuess').value;
+    console.log("User entered:", userInput);
+
+    document.getElementById('result').textContent = "You entered: " + userInput;
+
+    // OPTIONAL: you can do a fetch() here instead!
+  });
+</script>
+
+<p>Stuff that is old and shitty</p>
+
+
     <p>
-<form name="myForm" action="/guess" method="POST">
-<label for="guess"> Guess</label>
+
 <input type="text" id="guess" name = "guess" placeholder="Type ur guess!">
 </form> 
     </p>
 
 <p id="guessResponse">Js testing button below</p>
 
-<input id="guess2" placeholder="Type ur guess!">
-
-<button type="button" onclick="guessWord()">Try guess (raw js)</button>
+<button type="button" onclick="guessWord()">Type your guess!</button>
 
 <script>
-function myFunction() {
-  let guess = document.getElementById("guess2").value;
-  let ret = "ur guess bad";
-  if(guess =="bear" ){
-    ret = "your guess is good"
-  }
-  document.getElementById("guessResponse").innerHTML = ret;
-}
 
 function guessWord(){
-    let api_url = 'http://localhost:8000/api/guess'; 
+      let api_url = 'http://localhost:8000/api/guess'; 
         fetch(api_url, {
         method: 'POST',
         headers: {

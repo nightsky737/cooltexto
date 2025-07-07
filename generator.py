@@ -67,9 +67,13 @@ def generate_orderings(debug=False):
         print(f"generating for {word}")
     ret = order(word)
     session['current_ordering'] = ret
-    print("Setting session ordering with", len(ret), "items")
+    session['current_word'] = word
+    # print("Setting session ordering with", len(ret), "items")
 
     return ret
+def get_current_word():
+    return session['current_word']
+
 
 def guess(guess):
     ordering = session.get('current_ordering')
