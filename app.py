@@ -42,7 +42,7 @@ def guess():
 
 @app.route("/get_previous_guesses") #APparently need to do options in order to 
 def get_previous_guesses():
-    return jsonify(generator.get_guesses())
+    return jsonify({"previous_guesses": generator.get_guesses()})
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)   

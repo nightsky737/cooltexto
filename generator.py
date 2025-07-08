@@ -105,4 +105,4 @@ def get_guesses():
 
     sorted_guesses = sorted(guesses, key=lambda x: session['current_ordering'][x])
 
-    return {word: session['current_ordering'][word] for word in sorted_guesses}
+    return [(word, session['current_ordering'][word]) for word in sorted_guesses]

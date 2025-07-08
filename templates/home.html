@@ -1,12 +1,11 @@
   <!-- templates/home.html -->
   <!-- This is the template. It needs to be in the templates folder so that my app can access it. -->
-  <!-- templates/home.html -->
-  <!-- This is the template. It needs to be in the templates folder so that my app can access it. -->
 
   <!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8">
+      <link rel="stylesheet" href="style.css">
       <title>Cooler Contexto</title>
   </head>
   <script>
@@ -63,20 +62,27 @@
       */ 
       .then(response => response.json())
       .then(data => {
-      document.getElementById('result').textContent = "Your guess was" + word + "was rank " + data.rank;
-        })
-        .catch(error => console.error('Error:', error));
+      document.getElementById('result').textContent = "Guess " + word + " was " + data.rank + " away from target!";
+        }).then(whatever => {
 
-      try{
       //now i try using await 
-      const response = await fetch('http://localhost:8000/get_previous_guesses') 
-      const text = await response.text() //theres weird stuff with resolution; just gotta make sure this stuff resolves before trying to do anything else.
-      
-      document.getElementById('past_rankings').textContent = text;
-      }catch(error){
-            console.error('Error:', error); //dont want an error crapping the page, do we?
-      } 
+       fetch('http://localhost:8000/get_previous_guesses').then(response => response.json()).then(jsonned => {
+        let prevguesses=jsonned.previous_guesses
+      // previous guesses should be an array
+      let newList = "<ol>"
+      for(let i = 0; i <prevguesses.length; i++ ){
+        newList += "<li>" + prevguesses[i][0] + " which is rank " + prevguesses[i][1]+ "</li> \n" //i know this is terrible but im honestly done fighting html and js
+
+      }
+      newList += "</ol>"
+      document.getElementById('past_rankings').innerHTML = newList;
+      // document.getElementById('past_rankings').textContent = prevguesses;
+
+    })}
+      ).catch(error => console.error('Error:', error));
+ 
       }
   </script>
+ 
   </body>
   </html>    
