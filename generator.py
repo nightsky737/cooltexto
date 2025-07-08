@@ -68,22 +68,41 @@ def generate_orderings(debug=False):
     ret = order(word)
     session['current_ordering'] = ret
     session['current_word'] = word
+    session['user_guessed_ordering'] = []
     # print("Setting session ordering with", len(ret), "items")
 
     return ret
+
+
 def get_current_word():
     return session['current_word']
 
 
 def guess(guess):
-    ordering = session['current_ordering']
+    ordering = session.get('current_ordering')
 
     if not ordering:
-        return "ahahaha welcome to debugging hell"
+        return "ahahaha welcome to debugging pain"
         abort(400, description="No ordering found. Generate one first.")
 
     if guess not in ordering:
         return "not found in ordering guess again"
         abort(400, description=f"'{guess}' not found in ordering.")
    
+    session['user_guessed_ordering'].append(guess)
     return ordering[guess]
+
+#I guess we also need rankings? ATP we might just make a separate endpoint that gets the list of words?
+def get_guesses():
+        #Sorts and returns sorted dictionary of the user's previously guessed stuff
+
+    ordering = session.get('current_ordering')
+    guesses = session.get('user_guessed_ordering')
+
+    if not ordering or not guesses:
+        return "this should honestly not be happeninging."
+        abort(400)
+
+    sorted_guesses = sorted(guesses, key=lambda x: session['current_ordering'][x])
+
+    return {word: session['current_ordering'][word] for word in sorted_guesses}

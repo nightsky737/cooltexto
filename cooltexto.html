@@ -26,6 +26,7 @@
   </form>
 
   <p id="result">idk</p>
+  <p id="past_rankings">past stuff</p>
 
   <script>
     document.getElementById('makeGuess').addEventListener('submit', function(event) {
@@ -64,7 +65,13 @@
         })
         .catch(error => console.error('Error:', error));
 
-        return "";
+
+      fetch('http://localhost:8000/get_previous_guesses') 
+      .then(response => response.json())
+      .then(data => {
+      document.getElementById('past_rankings').textContent = data.past_rankings;
+        })
+        .catch(error => console.error('Error:', error));
       }
   </script>
   </body>

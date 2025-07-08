@@ -1,11 +1,13 @@
   <!-- templates/home.html -->
   <!-- This is the template. It needs to be in the templates folder so that my app can access it. -->
+  <!-- templates/home.html -->
+  <!-- This is the template. It needs to be in the templates folder so that my app can access it. -->
 
   <!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8">
-      <title>Cooler Contexto template. {{word}}</title>
+      <title>Cooler Contexto</title>
   </head>
   <script>
     let api_url = 'http://localhost:8000/generate'; 
@@ -26,6 +28,7 @@
   </form>
 
   <p id="result">idk</p>
+  <p id="past_rankings">past stuff</p>
 
   <script>
     document.getElementById('makeGuess').addEventListener('submit', function(event) {
@@ -34,7 +37,7 @@
       guessWord(document.getElementById("userGuess").value)
       });
 
-  function guessWord(word){
+  async function guessWord(word){
 
       let api_url = 'http://localhost:8000/guess'; 
       fetch(api_url, {
@@ -64,7 +67,15 @@
         })
         .catch(error => console.error('Error:', error));
 
-        return "";
+      try{
+      //now i try using await 
+      const response = await fetch('http://localhost:8000/get_previous_guesses') 
+      const text = await response.text() //theres weird stuff with resolution; just gotta make sure this stuff resolves before trying to do anything else.
+      
+      document.getElementById('past_rankings').textContent = text;
+      }catch(error){
+            console.error('Error:', error); //dont want an error crapping the page, do we?
+      } 
       }
   </script>
   </body>

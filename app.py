@@ -17,7 +17,7 @@ CORS(flask_app)  #https://medium.com/@mterrano1/cors-in-a-flask-api-38051388f8cc
 
 app.debug = True
 flask_app.secret_key = os.urandom(12)
-app.add_api("cooltexto.yml")
+# app.add_api("cooltexto.yml") NO THIS IS OLD AND SUCKS AND I GIVE UP ON IT
 
 SESSION_TYPE = 'redis'
 SESSION_REDIS = redis.Redis(host='localhost', port=6379)
@@ -37,10 +37,13 @@ def generate():
 def guess():
     if request.method == 'POST': #request is basically the info the client sent to the server.
         users_guess = request.get_json()["guess"]
-        print("a",users_guess)
         guess_rank=generator.guess(users_guess)
         return jsonify({"rank":guess_rank})
- 
+
+@app.route("/get_previous_guesses") #APparently need to do options in order to 
+def get_previous_guesses():
+    return jsonify(generator.get_guesses())
+
 if __name__ == "__main__":
     app.run(port=8000, debug=True)   
 
