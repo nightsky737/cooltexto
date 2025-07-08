@@ -76,12 +76,14 @@ def get_current_word():
 
 
 def guess(guess):
-    ordering = session.get('current_ordering')
+    ordering = session['current_ordering']
+
     if not ordering:
+        return "ahahaha welcome to debugging hell"
         abort(400, description="No ordering found. Generate one first.")
 
     if guess not in ordering:
+        return "not found in ordering guess again"
         abort(400, description=f"'{guess}' not found in ordering.")
-   
    
     return ordering[guess]

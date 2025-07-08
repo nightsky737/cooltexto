@@ -1,38 +1,71 @@
-<!-- templates/home.html -->
-<!-- This is the template. It needs to be in the templates folder so that my app can access it. -->
+  <!-- templates/home.html -->
+  <!-- This is the template. It needs to be in the templates folder so that my app can access it. -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cooler Contexto Template</title>
-</head>
-<body>
-    <h1> 
-        CoolTexto!!! (template). secret word: {{word}}
-    </h1>
-    <p>
-<form name="myForm" action="/guess" method="POST">
-<label for="guess"> Guess</label>
-<input type="text" id="guess" name = "guess" placeholder="Type ur guess!">
-</form> 
-    </p>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Cooler Contexto template. {{word}}</title>
+  </head>
+  <script>
+    let api_url = 'http://localhost:8000/generate'; 
+    var word;
+    fetch(api_url)
+    .then(response => response.json())
+    .then(data => {document.getElementById("title").textContent = "Cooltexto!! Secret word: " + data.word})
 
-<p id="guessResponse">Js testing button below</p>
+  </script>
 
-<input id="guess2" placeholder="Type ur guess!">
+  <body>
+      <h1 id="title"> 
+      </h1>
 
-<button type="button" onclick="myFunction()">Try guess (raw js)</button>
+  <form id="makeGuess">
+    <input type="text" id="userGuess" placeholder="Type ur guess" required>
+    <button type="submit">Submit</button>
+  </form>
 
-<script>
-function myFunction() {
-  let guess = document.getElementById("guess2").value;
-  let ret = "ur guess bad";
-  if(guess =="bear" ){
-    ret = "your guess is good"
-  }
-  document.getElementById("guessResponse").innerHTML = ret;
-}
-</script>
-</body>
-</html>    
+  <p id="result">idk</p>
+
+  <script>
+    document.getElementById('makeGuess').addEventListener('submit', function(event) {
+      event.preventDefault();  
+      
+      guessWord(document.getElementById("userGuess").value)
+      });
+
+  function guessWord(word){
+
+      let api_url = 'http://localhost:8000/guess'; 
+      fetch(api_url, {
+          method: 'POST', //tells it its a post
+            credentials: 'include',
+          headers: {
+          'Content-Type': 'application/json', //basically tells it yo im giving u a json give me back a json
+          "Accept": "application/json"
+          },
+      body: JSON.stringify({ guess: word }) //turns it into json format
+      })
+      /*Callback: Fxn that is passed to another fxn to be executed whenever or upon specific event happenign
+      Chaining is when 2 or more async operations back to back. Promise chain here.
+      Each then() returns a new promise
+      .then(function (result) {
+      return doSomethingElse(result);
+      }) is equivalent to .then((result) => doSomethingElse(result))
+      Basically its saying that after function(result) runs doSomethingElse(result) will run
+      Always return promises to track and "settle" (fulfilled/rejected [not pending]) promises in chain 
+      Once settled, a fxn will be called depending on whether or not it had been fulfilled or rejected
+
+      could also use await keyword instead of chaining a bunch of
+      */ 
+      .then(response => response.json())
+      .then(data => {
+      document.getElementById('result').textContent = "Your guess was" + word + "was rank " + data.rank;
+        })
+        .catch(error => console.error('Error:', error));
+
+        return "";
+      }
+  </script>
+  </body>
+  </html>    

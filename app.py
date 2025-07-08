@@ -15,6 +15,7 @@ flask_app = app.app
 # CORS(flask_app, origins="http://localhost:5500")  basically stops it from tweaking when i try to access it from a html page
 CORS(flask_app)  #https://medium.com/@mterrano1/cors-in-a-flask-api-38051388f8cc
 
+app.debug = True
 flask_app.secret_key = os.urandom(12)
 app.add_api("cooltexto.yml")
 
@@ -32,12 +33,13 @@ def generate():
     generator.generate_orderings() #Returns the word but i am not supposed to put the word in js so ppl cant cheat
     return jsonify({"word": generator.get_current_word()})
 
-@app.route("/guess", methods=["POST"])
+@app.route("/guess", methods=["POST"]) #APparently need to do options in order to 
 def guess():
-    if request.method == 'POST':
-        guess_rank=generator.guess(request.form.get("guess"))
-        return jsonify({'rank': guess_rank})
-        # return render_template("guess.html", guess=request.form.get("guess"), guess_ranking=guess_rank) 
+    if request.method == 'POST': #request is basically the info the client sent to the server.
+        users_guess = request.get_json()["guess"]
+        print("a",users_guess)
+        guess_rank=generator.guess(users_guess)
+        return jsonify({"rank":guess_rank})
  
 if __name__ == "__main__":
     app.run(port=8000, debug=True)   
