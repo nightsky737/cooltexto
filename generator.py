@@ -38,7 +38,7 @@ def load_embeddings(file_path):
                 embeddings[word] = vector
     return embeddings
 
-embeddings = load_embeddings('glove.6B.200d.txt')
+embeddings = load_embeddings('glove.6B.300d.txt')
 
 os.chdir("..")
 
@@ -99,10 +99,14 @@ def get_guesses():
     ordering = session.get('current_ordering')
     guesses = session.get('user_guessed_ordering')
 
-    if not ordering or not guesses:
-        return "this should honestly not be happeninging."
-        abort(400)
+    if not ordering:
+        print( "Ordering not yet created. this should not be happening")
 
-    sorted_guesses = sorted(guesses, key=lambda x: session['current_ordering'][x])
+    if guesses == None:
+        print( "Guesses not yet created. this should not be happening")
 
-    return [(word, session['current_ordering'][word]) for word in sorted_guesses]
+    if ordering != None and guesses != None:
+        sorted_guesses = sorted(guesses, key=lambda x: session['current_ordering'][x])
+
+        return [(word, session['current_ordering'][word]) for word in sorted_guesses]
+ 
