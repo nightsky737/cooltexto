@@ -82,30 +82,29 @@
       .then(response => response.json())
       .then(data => {
         if (data.rank === "not found"){
-          document.getElementById('result').textContent = "Guess " + word + " was not found!";
+          document.getElementById('result').textContent = word + " was not found!";
 
-        }else if (data.rank == 1){
+        }else if (data.rank == 0){
             document.getElementById('result').innerHTML=  
-              `  <p>"Congrats! ${word} was the secret word!t!</p> 
+              `  <p>"Congrats! ${word} was the secret word!</p> 
               <button type="button" class= onclick="playAgain()">Play Again!</button>`
               //apparently fstring sare like this and so are multine stirnsg
+        }else if(data.rank == "already guessed"){
+          document.getElementById('result').textContent =  word + " was already tried!";
         }else{ 
-          
-            document.getElementById('result').textContent = "Guess " + word + " was " + data.rank + " away from target!";
-
+            document.getElementById('result').textContent = word + " was " + data.rank + " away from target!";
         }
         }).then(whatever => {
         fetch('http://localhost:8000/get_previous_guesses').then(response => response.json()).then(jsonned => {
-        let prevguesses=jsonned.previous_guesses
-      // previous guesses should be an array
-      let newList = "<ol>"
-      for(let i = 0; i <prevguesses.length; i++ ){
-        newList += "<li>" + prevguesses[i][0] + " which is rank " + prevguesses[i][1]+ "</li> \n" //i know this is terrible but im honestly done fighting html and js
-
-      }
-      newList += "</ol>"
-      document.getElementById('past_rankings').innerHTML = newList;
-      // document.getElementById('past_rankings').textContent = prevguesses;
+        let prevguesses=jsonned.previous_guesses 
+        // previous guesses should be an array
+        let newList = "<ol>"
+        for(let i = 0; i <prevguesses.length; i++ ){
+          newList += "<li>" + prevguesses[i][0] + " which is rank " + prevguesses[i][1]+ "</li> \n" //i know this is terrible but im honestly done fighting html and js
+        }
+        newList += "</ol>"
+        document.getElementById('past_rankings').innerHTML = newList;
+        // document.getElementById('past_rankings').textContent = prevguesses;
 
     })}
       ).catch(error => console.error('Error:', error));

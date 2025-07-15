@@ -5,11 +5,15 @@ Cooltexto:
 - Timer (Javascript)
 - pvp usernames (javascript)
 
+# Notes:
+Words that are definitely english words might be "not found", as I don't have the vectors of those.
+
 Structure:
 Get: Generate the word list?
 Get: Get the results of a guess. I "guess" that's it.
 
 Post and put: Leaderboard functionality prolly Ill deal with that later
+
 
 Todo:
 - Get better word vectors :sob: These are missing a LOT of stuff. 
