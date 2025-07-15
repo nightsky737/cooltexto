@@ -32,7 +32,9 @@
 </div>
 
   <div>
-  <p id="result" class="guess_result"></p>
+  <p id="result" class="guess_result">
+  </p>
+
 </div>  
 
   <div>
@@ -72,11 +74,21 @@
       */ 
       .then(response => response.json())
       .then(data => {
-      document.getElementById('result').textContent = "Guess " + word + " was " + data.rank + " away from target!";
+        if (data.rank === "not found"){
+          document.getElementById('result').textContent = "Guess " + word + " was not found!";
+
+        }else if (data.rank == 1){
+            document.getElementById('result').innerHTML=  
+              `  <p>"Congrats! " + ${word} + " was the secret word!t!</p> 
+              <button type="button" onclick="playAgain()">Play Again!</button>`
+              //apparently fstring sare like this and so are multine stirnsg
+        }else{ 
+          
+            document.getElementById('result').textContent = "Guess " + word + " was " + data.rank + " away from target!";
+
+        }
         }).then(whatever => {
-
-
-          fetch('http://localhost:8000/get_previous_guesses').then(response => response.json()).then(jsonned => {
+        fetch('http://localhost:8000/get_previous_guesses').then(response => response.json()).then(jsonned => {
         let prevguesses=jsonned.previous_guesses
       // previous guesses should be an array
       let newList = "<ol>"

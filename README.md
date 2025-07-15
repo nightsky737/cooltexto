@@ -12,4 +12,4 @@ Get: Get the results of a guess. I "guess" that's it.
 Post and put: Leaderboard functionality prolly Ill deal with that later
 
 Todo:
-- Get better word vectors :sob:
+- Get better word vectors :sob: These are missing a LOT of stuff. 

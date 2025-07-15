@@ -86,11 +86,11 @@ def guess(guess):
         abort(400, description="No ordering found. Generate one first.")
 
     if guess not in ordering:
-        return "not found in ordering guess again"
+        return "not found"
         abort(400, description=f"'{guess}' not found in ordering.")
    
     session['user_guessed_ordering'].append(guess)
-    return ordering[guess]
+    return ordering[guess] + 1
 
 #I guess we also need rankings? ATP we might just make a separate endpoint that gets the list of words?
 def get_guesses():
