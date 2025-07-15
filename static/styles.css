@@ -1,4 +1,26 @@
-ol li{
+/* i have no idea what im doing im just w3schoolsing everything*/
+ol{
   list-style-type: none;
-  color:blue;
+    background-color:rgb(58, 58, 151);
+    border-radius: 10px;
+
+}
+
+li{
+  list-style-type: none;
+  color:rgb(214, 214, 255);
 } 
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:rgb(4, 4, 56)
+}
+
+.flex-container{
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+}

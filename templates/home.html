@@ -18,16 +18,24 @@
   </script> 
 
   <body>
-      <h1 id="title"> 
-      </h1>
+  
+  <div class="flex-container">
 
+ 
+  <div>
   <form id="makeGuess">
     <input type="text" id="userGuess" placeholder="Type ur guess" required>
     <button type="submit">Submit</button>
   </form>
+</div>
 
-  <p id="result">idk</p> 
-  <p id="past_rankings">past stuff</p>
+  <div>
+  <p id="result"></p>
+</div>  
+
+  <div>
+  <p id="past_rankings"></p>
+  </div>
 
   <script>
     document.getElementById('makeGuess').addEventListener('submit', function(event) {
@@ -83,6 +91,6 @@
  
       }
   </script>
- 
+  </div>
   </body>
   </html>    
