@@ -10,7 +10,6 @@
   </head>
   <script> 
     let api_url = 'http://localhost:8000/generate'; 
-    var word;
     fetch(api_url)
   </script> 
 
@@ -30,16 +29,22 @@
 
   <div>
   <p id="result" class="guess_result">
+    Make your first guess!
   </p>
 
 </div>  
+  <div>
+    <h2>
+      Guesses!
+    </h2>
 
+  </div>
   <div>
   <p id="past_rankings"></p>  
   </div>
 
   <div>
-    <button type = "button" onclick="revealWord()"> Reveal word</button>
+    <button type = "button" class="centerbuttons" onclick="revealWord()"> Reveal word</button>
     <p id="secret_word"></p>
   </div>
   <script>
@@ -47,7 +52,7 @@
       event.preventDefault();  
       
       guessWord(document.getElementById("userGuess").value)
-      });
+      }); 
   function revealWord(){
     let api_url = 'http://localhost:8000/reveal_word'; 
     fetch(api_url)
@@ -86,8 +91,8 @@
 
         }else if (data.rank == 0){
             document.getElementById('result').innerHTML=  
-              `  <p>"Congrats! ${word} was the secret word!</p> 
-              <button type="button" class= onclick="playAgain()">Play Again!</button>`
+              `  <p>Congrats! ${word} was the secret word!</p> 
+              <button type="button" class="centerbuttons" onclick="playAgain()">Play Again!</button>`
               //apparently fstring sare like this and so are multine stirnsg
         }else if(data.rank == "already guessed"){
           document.getElementById('result').textContent =  word + " was already tried!";
@@ -104,17 +109,19 @@
         }
         newList += "</ol>"
         document.getElementById('past_rankings').innerHTML = newList;
-        // document.getElementById('past_rankings').textContent = prevguesses;
-
     })}
       ).catch(error => console.error('Error:', error));
  
       }
-
+ 
   function playAgain(){
-    // play again.
+    let api_url = 'http://localhost:8000/generate'; 
+    fetch(api_url)
+    document.getElementById("past_rankings").innerHTML = "";
+    document.getElementById("result").innerHTML = "New game loaded! Make your first guess!";
+    document.getElementById("secret_word").innerHTML = "";
   }
-  </script>
+  </script>  
   </div>
   </body>
   </html>    
