@@ -33,7 +33,10 @@ body {
 
 .guess_result{
 color:rgb(0, 135, 135);
+  align-items: center;
+
 }
+
 
 /*Apparently this is the best way to typically organize stuff*/
 .flex-container{ 

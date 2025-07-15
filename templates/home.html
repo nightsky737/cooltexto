@@ -12,9 +12,6 @@
     let api_url = 'http://localhost:8000/generate'; 
     var word;
     fetch(api_url)
-    .then(response => response.json())
-    .then(data => {document.getElementById("title").textContent = "Cooltexto!! Secret word: " + data.word})
-
   </script> 
 
   <body>
@@ -41,12 +38,22 @@
   <p id="past_rankings"></p>  
   </div>
 
+  <div>
+    <button type = "button" onclick="revealWord()"> Reveal word</button>
+    <p id="secret_word"></p>
+  </div>
   <script>
     document.getElementById('makeGuess').addEventListener('submit', function(event) {
       event.preventDefault();  
       
       guessWord(document.getElementById("userGuess").value)
       });
+  function revealWord(){
+    let api_url = 'http://localhost:8000/reveal_word'; 
+    fetch(api_url)
+    .then(response => response.json())
+    .then(data => {document.getElementById("secret_word").textContent = "Secret word: " + data.word})
+  }
 
   async function guessWord(word){
 
@@ -79,8 +86,8 @@
 
         }else if (data.rank == 1){
             document.getElementById('result').innerHTML=  
-              `  <p>"Congrats! " + ${word} + " was the secret word!t!</p> 
-              <button type="button" onclick="playAgain()">Play Again!</button>`
+              `  <p>"Congrats! ${word} was the secret word!t!</p> 
+              <button type="button" class= onclick="playAgain()">Play Again!</button>`
               //apparently fstring sare like this and so are multine stirnsg
         }else{ 
           
@@ -104,6 +111,10 @@
       ).catch(error => console.error('Error:', error));
  
       }
+
+  function playAgain(){
+    // play again.
+  }
   </script>
   </div>
   </body>
