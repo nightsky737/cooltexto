@@ -21,7 +21,7 @@ with open( "stopwords-en.txt", "r", encoding='utf-8') as file:
 
 def filter(word):
     '''
-    If its common, a stop word, or too short:
+    If its common, not a stop word, or too short:
     Returns false.
     common_words.get(word)
     '''
@@ -69,8 +69,6 @@ def generate_orderings(debug=False):
     session['current_ordering'] = ret
     session['current_word'] = word
     session['user_guessed_ordering'] = []
-    # print("Setting session ordering with", len(ret), "items")
-
     return ret
 
 

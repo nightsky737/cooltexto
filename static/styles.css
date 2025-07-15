@@ -47,7 +47,8 @@ p{
 
 }
 .playagain{
-  justify-content: center;
+  display: block;
+  margin-top: 20px;
 
 }
 /*Apparently this is the best way to typically organize stuff*/
