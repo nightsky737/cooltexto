@@ -7,6 +7,8 @@
       <meta charset="UTF-8">
       <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
       <title>Cooler Contexto</title>
+      <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   </head>
 
 
@@ -51,10 +53,10 @@
   <p id="past_rankings"></p>  
   </div>
 
-  <div>
-    <button type = "button" class="centerbuttons" onclick="revealWord()"> Reveal word</button>
+  <div id="reveal_playagain">
+    <button type = "button" class="centerbuttons" onclick="revealWord()"> Reveal word</button>  </div>
+
     <p id="secret_word"></p>
-  </div>
   <script>
     
     document.getElementById('makeGuess').addEventListener('submit', function(event) {
@@ -93,9 +95,16 @@
               const seconds = (timeTaken % 60).toFixed(2);
 
             document.getElementById('result').innerHTML=  
-              `  <p>Congrats! ${word} was the secret word! You took ${minutes} minutes and ${seconds} seconds to guess the word!</p> 
-              <button type="button" class="centerbuttons" onclick="playAgain()">Play Again!</button>`
+              `  <p>Congrats! "${word}" was the secret word! You took ${minutes} minutes and ${seconds} seconds to guess the word!</p> 
+                <button type="button" class="centerbuttons" onclick="playAgain()">Play Again!</button>`
+            document.getElementById("reveal_playagain").innerHTML=
+                            `<button type="button" class="centerbuttons" onclick="playAgain()">Play Again!</button> `
 
+            confetti({
+              particleCount: 150,
+              spread: 70,
+              origin: { y: 0.6 }
+            });
         }else if(data.rank == "already guessed"){ 
           document.getElementById('result').textContent =  word + " was already tried!";
         }else{ 
@@ -121,7 +130,7 @@
  document.getElementById("past_rankings").innerHTML = "";
     document.getElementById("result").innerHTML = "Loading new game! Please wait.";
     document.getElementById("secret_word").innerHTML = ""; 
-    
+    document.getElementById("reveal_playagain").innerHTML = `<button type = "button" class="centerbuttons" onclick="revealWord()"> Reveal word</button>`
     fetch(api_url).then(whatever =>{
     document.getElementById("result").innerHTML = "New game loaded! Make your first guess!";
     startTime = new Date()
