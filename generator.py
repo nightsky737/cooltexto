@@ -63,7 +63,6 @@ def generate_orderings(debug=False):
 
     while(not filter(word)):
         word = random.choice(list(embeddings.keys()))
-    print(word)
     if debug:
         print(f"generating for {word}")
     ret = order(word)

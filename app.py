@@ -1,32 +1,35 @@
 #Main app
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, url_for
 import generator
 from flask_session import Session
 import redis
 import connexion
 import os
 from flask_cors import CORS
+import uuid 
+import json
 # http://localhost:5500/cooltexto.html
 # http://localhost:8000/api/generator
 #http://localhost:8000/api/ui/#/default/generator.generate_orderings
 #http://192.168.1.134:8000/
 app = connexion.App(__name__, specification_dir="./")
 flask_app = app.app
-# CORS(flask_app, origins="http://localhost:5500")  basically stops it from tweaking when i try to access it from a html page
 CORS(flask_app)  #https://medium.com/@mterrano1/cors-in-a-flask-api-38051388f8cc
 
 app.debug = True
 flask_app.secret_key = os.urandom(12)
-# app.add_api("cooltexto.yml") NO THIS IS OLD AND SUCKS AND I GIVE UP ON IT
 
 SESSION_TYPE = 'redis'
 SESSION_REDIS = redis.Redis(host='localhost', port=6379)
 flask_app.config.from_object(__name__)
 Session(flask_app)
 
-@app.route("/") 
+def get_game_key(room_id):
+    return f"game:{room_id}"
+
+@app.route("/")  
 def home():
-    return render_template("home.html", word= "WELCOME TO THE DEFAULT PAGE")  
+    return render_template("home.html", word= "WELCOME TO THE DEFAULT PAGE") 
 
 @app.route("/generate") 
 def generate():
