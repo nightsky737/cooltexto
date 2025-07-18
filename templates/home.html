@@ -93,7 +93,7 @@
               const seconds = (timeTaken % 60).toFixed(2);
 
             document.getElementById('result').innerHTML=  
-              `  <p>Congrats! ${word} was the secret word! You took ${timeTaken} minutes and ${seconds} seconds to guess the word!</p> 
+              `  <p>Congrats! ${word} was the secret word! You took ${minutes} minutes and ${seconds} seconds to guess the word!</p> 
               <button type="button" class="centerbuttons" onclick="playAgain()">Play Again!</button>`
 
         }else if(data.rank == "already guessed"){ 
