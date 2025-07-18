@@ -15,7 +15,7 @@ with open("common_words.txt", "r", encoding='utf-8') as file:
 
 
 stop_words = {} #https://github.com/stopwords-iso/stopwords-en/blob/master/stopwords-en.txt
-with open( "stopwords-en.txt", "r", encoding='utf-8') as file:
+with open( "english.txt", "r", encoding='utf-8') as file:
     for line in file:
         stop_words[line[:-1]] = True
 
@@ -33,12 +33,10 @@ def load_embeddings(file_path):
         for line in f:
             values = line.split()
             word = values[0]
-            if(filter(word)):
-                vector = np.asarray(values[1:], dtype='float32')
-                embeddings[word] = vector
-    return embeddings
+            vector = np.asarray(values[1:], dtype='float32')
+            embeddings[word] = vector
 
-embeddings = load_embeddings('glove.6B.300d.txt')
+embeddings = load_embeddings('glove.6B.300d.txt') 
 
 os.chdir("..")
 
@@ -62,6 +60,9 @@ def order(word):
 
 def generate_orderings(debug=False):
     word = random.choice(list(embeddings.keys()))
+
+    while(not filter(word)):
+        word = random.choice(list(embeddings.keys()))
     print(word)
     if debug:
         print(f"generating for {word}")
