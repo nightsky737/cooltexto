@@ -116,10 +116,14 @@
 
   function playAgain(){
     let api_url = 'http://localhost:8000/generate'; 
-    fetch(api_url)
-    document.getElementById("past_rankings").innerHTML = "";
+ document.getElementById("past_rankings").innerHTML = "";
+    document.getElementById("result").innerHTML = "Loading new game! Please wait.";
+    document.getElementById("secret_word").innerHTML = ""; 
+    fetch(api_url).then(whatever =>{
+
+  
     document.getElementById("result").innerHTML = "New game loaded! Make your first guess!";
-    document.getElementById("secret_word").innerHTML = "";
+      })
   }
   </script>  
   </div>
