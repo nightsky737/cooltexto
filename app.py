@@ -38,7 +38,7 @@ def guess():
     if request.method == 'POST': #request is basically the info the client sent to the server.
         users_guess = request.get_json()["guess"]
         guess_rank=generator.guess(users_guess)
-        return jsonify({"rank": guess_rank})
+        return jsonify({"rank": guess_rank}) 
 
 @app.route("/get_previous_guesses") #APparently need to do options in order to 
 def get_previous_guesses():
@@ -50,8 +50,5 @@ def reveal_word():
     return jsonify({"word": word})
 
 if __name__ == "__main__":
-    app.run(port=8000, debug=True)   
-
-
-
+    app.run(port=8000, debug=True)
 

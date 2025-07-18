@@ -8,16 +8,16 @@ from numpy import linalg as LA
 
 os.chdir("word_data") #crappy way to do it.
 
-common_words = {} #https://github.com/first20hours/google-10000-english
+common_words = set() #https://github.com/first20hours/google-10000-english
 with open("common_words.txt", "r", encoding='utf-8') as file:
     for line in file:
-        common_words[line[:-1]] = True #Omitting the /n
+        common_words.add(line[:-1]) #Omitting the /n
 
 
-stop_words = {} #https://github.com/stopwords-iso/stopwords-en/blob/master/stopwords-en.txt
+stop_words = set() #https://github.com/stopwords-iso/stopwords-en/blob/master/stopwords-en.txt
 with open( "english.txt", "r", encoding='utf-8') as file:
     for line in file:
-        stop_words[line[:-1]] = True
+        stop_words.add(line[:-1])
 
 def filter(word):
     '''
@@ -25,7 +25,7 @@ def filter(word):
     Returns false.
     common_words.get(word)
     '''
-    return (common_words.get(word)) and (not stop_words.get(word)) and len(word) > 3
+    return (word in common_words) and (not (word in stop_words )) and len(word) > 3
 
 def load_embeddings(file_path):
     embeddings = {}
@@ -33,8 +33,8 @@ def load_embeddings(file_path):
         for line in f:
             values = line.split()
             word = values[0]
-            vector = np.asarray(values[1:], dtype='float32')
-            embeddings[word] = vector
+            embeddings[word] = np.asarray(values[1:], dtype='float32')
+    return embeddings
 
 embeddings = load_embeddings('glove.6B.300d.txt') 
 
