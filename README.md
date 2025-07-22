@@ -11,6 +11,12 @@
 
 **When starting the game, please wait for the "loading game! please wait" to turn to "Game loaded! Make your first guess!"**
 
+# Demo screenshots:
+<img width="1899" height="1041" alt="Screenshot 2025-07-22 134232" src="https://github.com/user-attachments/assets/0a2e4f64-5eff-493a-9982-71bfed134056" />
+<img width="1567" height="909" alt="Screenshot 2025-07-22 134300" src="https://github.com/user-attachments/assets/0356277f-6bc2-4a3d-aaab-d625bb0f62b2" />
+
+These are not all the features, just the most important ones.
+
 # Notes:
 - Words that are definitely english words might be "not found", as I don't have the vectors of those. This should only occur rarely. 
 
