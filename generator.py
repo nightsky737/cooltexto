@@ -36,7 +36,7 @@ def load_embeddings(file_path):
             embeddings[word] = np.asarray(values[1:], dtype='float32')
     return embeddings
 
-embeddings = load_embeddings('glove.6B.300d.txt') 
+embeddings = load_embeddings('glove.6B.200d.txt') 
 
 os.chdir("..")
 
