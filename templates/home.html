@@ -69,6 +69,12 @@
     fetch(api_url)
     .then(response => response.json())
     .then(data => {document.getElementById("secret_word").textContent = "Secret word: " + data.word})
+    document.getElementById("reveal_playagain").innerHTML = '<button type = "button" class="centerbuttons" onclick="hideWord()"> Hide word</button>  </div>'
+
+  }
+  function hideWord(){
+    document.getElementById("reveal_playagain").innerHTML = '<button type = "button" class="centerbuttons" onclick="revealWord()"> Reveal word</button>  </div>'
+
   }
 
   async function guessWord(word){

@@ -9,7 +9,7 @@ from numpy import linalg as LA
 os.chdir("word_data") #crappy way to do it.
 
 common_words = set() #https://github.com/first20hours/google-10000-english
-with open("common_words.txt", "r", encoding='utf-8') as file:
+with open("wordsfiltered.txt", "r", encoding='utf-8') as file:
     for line in file:
         common_words.add(line[:-1]) #Omitting the /n
 

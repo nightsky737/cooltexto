@@ -1,18 +1,22 @@
 # Info and how to play:
-Cooltexto: 
+Features!!!: 
 - The game will generate a secret word for you to guess!
+
 - To help you guess, you can guess other words and the game will tell you how far away (ie how different) they are from your guess!
-- Timer (Javascript)
-- pvp usernames (javascript)
+
+- The list of words you've guessed previously will appear, in order of closeness to the hidden word, below your guess.
+
+- Guessing might be a bit hard/time consuming (as it is for regular contexto), so there is also a reveal word button. Feel free to guess some words you think are similar to the revealed word to really test the vector similarity orderings! 
+
+- After guessing the word, you'll get to know how long you took. You'll also get a play again button. Please wait for it to say "New game loaded!" before guessing. (This lets the cosine similarity be calculated)
+
+
+When starting the game, please wait for the "loading game! please wait" to turn to "Game loaded! Make your first guess!" The long load time is due to loading all of the gloVe vectors.
 
 # Notes:
-Words that are definitely english words might be "not found", as I don't have the vectors of those.
+Words that are definitely english words might be "not found", as I don't have the vectors of those. This should only occur rarely. The only words that can be chosen are a subset of ~300 common words that I hand filtered to ensure that they are guessable.
 
-Structure:
-Get: Generate the word list?
-Get: Get the results of a guess. I "guess" that's it.
-
-Post and put: Leaderboard functionality prolly Ill deal with that later 
+When over 1000 words away from the target, the similarity scores are pretty meaningless. My recommended strategy is guess randomly until you find a fairly close. 
 
 # Setup: 
 After cloning the repo, create a folder called word_data. In it, add these three files:
