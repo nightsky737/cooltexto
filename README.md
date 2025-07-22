@@ -11,12 +11,14 @@ Features!!!:
 - After guessing the word, you'll get to know how long you took. You'll also get a play again button. Please wait for it to say "New game loaded!" before guessing. (This lets the cosine similarity be calculated)
 
 
-When starting the game, please wait for the "loading game! please wait" to turn to "Game loaded! Make your first guess!" The long load time is due to loading all of the gloVe vectors.
+**When starting the game, please wait for the "loading game! please wait" to turn to "Game loaded! Make your first guess!"**
 
 # Notes:
-Words that are definitely english words might be "not found", as I don't have the vectors of those. This should only occur rarely. The only words that can be chosen are a subset of ~300 common words that I hand filtered to ensure that they are guessable.
+- Words that are definitely english words might be "not found", as I don't have the vectors of those. This should only occur rarely. 
 
-When over 1000 words away from the target, the similarity scores are pretty meaningless. My recommended strategy is guess randomly until you find a fairly close. 
+- The only words that can be chosen are a subset of ~300 common words that I hand filtered to ensure that they are guessable.
+
+- When over 1000 words away from the target, the similarity scores are pretty meaningless. My recommended strategy is guess randomly until you find one fairly close. 
 
 # Setup: 
 After cloning the repo, create a folder called word_data. In it, add these three files:
