@@ -6,12 +6,7 @@ import redis
 import connexion
 import os
 from flask_cors import CORS
-import uuid 
-import json
-# http://localhost:5500/cooltexto.html
-# http://localhost:8000/api/generator
-#http://localhost:8000/api/ui/#/default/generator.generate_orderings
-#http://192.168.1.134:8000/
+
 app = connexion.App(__name__, specification_dir="./")
 flask_app = app.app
 CORS(flask_app)  #https://medium.com/@mterrano1/cors-in-a-flask-api-38051388f8cc
