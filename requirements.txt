@@ -5,4 +5,3 @@ redis
 connexion
 numpy
 random
-gunicorn

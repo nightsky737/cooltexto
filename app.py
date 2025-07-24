@@ -15,7 +15,7 @@ app.debug = True
 flask_app.secret_key = os.urandom(12)
 
 SESSION_TYPE = 'redis'
-SESSION_REDIS = redis.Redis(host='localhost', port=6379)
+SESSION_REDIS = redis.Redis(host='localhost', port=44265)
 flask_app.config.from_object(__name__)
 Session(flask_app)
 
