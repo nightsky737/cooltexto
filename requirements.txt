@@ -1,3 +1,9 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3532840fc6ba547295f46633d1d913c95a083c0b6b2d332ec550a50b60666237
-size 79
+flask
+flask_cors
+flask_session
+redis
+connexion
+os
+numpy
+random
+gunicorn
