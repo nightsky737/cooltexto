@@ -32,7 +32,7 @@
 </div>  
   <script> 
     let startTime = 0 
-    let api_url = 'http://localhost:8000/generate'; 
+    let api_url = 'http://cooltexto.nightsky.hackclub.app/generate'; 
     document.getElementById("result").innerHTML = "Loading game! Please wait.";
 
     fetch(api_url).then(
@@ -65,7 +65,7 @@
       guessWord(document.getElementById("userGuess").value)
       }); 
   function revealWord(){
-    let api_url = 'http://localhost:8000/reveal_word'; 
+    let api_url = 'http://cooltexto.nightsky.hackclub.app/reveal_word'; 
     fetch(api_url)
     .then(response => response.json())
     .then(data => {document.getElementById("secret_word").textContent = "Secret word: " + data.word})
@@ -79,7 +79,7 @@
   }
 
   async function guessWord(word){
-      let api_url = 'http://localhost:8000/guess'; 
+      let api_url = 'http://cooltexto.nightsky.hackclub.app/guess'; 
       fetch(api_url, {
           method: 'POST', //tells it its a post
             credentials: 'include',
@@ -118,7 +118,7 @@
             document.getElementById('result').textContent = word + " was " + data.rank + " away from target!";
         }
         }).then(whatever => {
-        fetch('http://localhost:8000/get_previous_guesses').then(response => response.json()).then(jsonned => {
+        fetch('http://cooltexto.nightsky.hackclub.app/get_previous_guesses').then(response => response.json()).then(jsonned => {
         let prevguesses=jsonned.previous_guesses 
         // previous guesses should be an array
         let newList = "<ol>"
@@ -133,7 +133,7 @@
       }
 
   function playAgain(){
-    let api_url = 'http://localhost:8000/generate'; 
+    let api_url = 'http://cooltexto.nightsky.hackclub.app/generate'; 
  document.getElementById("past_rankings").innerHTML = "";
     document.getElementById("result").innerHTML = "Loading new game! Please wait.";
     document.getElementById("secret_word").innerHTML = ""; 
