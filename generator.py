@@ -6,20 +6,18 @@ import random
 from numpy import linalg as LA
 
 
-os.chdir("word_data") #crappy way to do it.
 
 common_words = set() #https://github.com/first20hours/google-10000-english
-with open("wordsfiltered.txt", "r", encoding='utf-8') as file:
+with open("word_data/wordsfiltered.txt", "r", encoding='utf-8') as file:
     for line in file:
         common_words.add(line[:-1]) #Omitting the /n
 
-
 stop_words = set() #https://github.com/stopwords-iso/stopwords-en/blob/master/stopwords-en.txt
-with open( "english.txt", "r", encoding='utf-8') as file:
+with open( "word_data/english.txt", "r", encoding='utf-8') as file:
     for line in file:
         stop_words.add(line[:-1])
 
-def filter(word):
+def filter_word(word):
     '''
     If its common, not a stop word, or too short:
     Returns false.
@@ -36,9 +34,8 @@ def load_embeddings(file_path):
             embeddings[word] = np.asarray(values[1:], dtype='float32')
     return embeddings
 
-embeddings = load_embeddings('glove.6B.200d.txt') 
+embeddings = load_embeddings('word_data/glove.6B.200d.txt') 
 
-os.chdir("..")
 
 def get_cos_sims(word):
     '''give it a word and it will return a dictionary of the cosine sims'''
@@ -58,13 +55,13 @@ def order(word):
     all_words_list.sort(key=lambda x: cos_sims[x], reverse=True)
     return dict(zip(all_words_list, [i for i in range(len(all_words_list))]))
 
-def generate_orderings(debug=False):
+def generate_orderings(debug=True):
+    print('generating the dang thing')
     word = random.choice(list(embeddings.keys()))
 
-    while(not filter(word)):
+    while(not filter_word(word)):
         word = random.choice(list(embeddings.keys()))
-    if debug:
-        print(f"generating for {word}")
+    print(f"generating for {word}")
     ret = order(word)
     session['current_ordering'] = ret
     session['current_word'] = word

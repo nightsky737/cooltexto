@@ -7,8 +7,6 @@
       <meta charset="UTF-8">
       <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
       <title>Cooler Contexto</title>
-<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script> 
-<!--https://www.npmjs.com/package/js-confetti -->
 
   </head>
 
@@ -32,8 +30,9 @@
   </p>
 </div>  
   <script> 
+
     let startTime = 0 
-    let api_url = 'http://cooltexto.nightsky.hackclub.app/generate'; 
+    let api_url = '/generate'; 
     document.getElementById("result").innerHTML = "Loading game! Please wait.";
 
     fetch(api_url).then(
@@ -66,7 +65,7 @@
       guessWord(document.getElementById("userGuess").value)
       }); 
   function revealWord(){
-    let api_url = 'http://cooltexto.nightsky.hackclub.app/reveal_word'; 
+    let api_url = '/reveal_word'; 
     fetch(api_url)
     .then(response => response.json())
     .then(data => {document.getElementById("secret_word").textContent = "Secret word: " + data.word})
@@ -80,7 +79,7 @@
   }
 
   async function guessWord(word){
-      let api_url = 'http://cooltexto.nightsky.hackclub.app/guess'; 
+      let api_url = '/guess'; 
       fetch(api_url, {
           method: 'POST', //tells it its a post
             credentials: 'include',
@@ -108,18 +107,14 @@
             document.getElementById("reveal_playagain").innerHTML=
                             `<button type="button" class="centerbuttons" onclick="playAgain()">Play Again!</button> `
 
-            confetti({
-              particleCount: 150,
-              spread: 70,
-              origin: { y: 0.6 }
-            });
+      
         }else if(data.rank == "already guessed"){ 
           document.getElementById('result').textContent =  word + " was already tried!";
         }else{ 
             document.getElementById('result').textContent = word + " was " + data.rank + " away from target!";
         }
         }).then(whatever => {
-        fetch('http://cooltexto.nightsky.hackclub.app/get_previous_guesses').then(response => response.json()).then(jsonned => {
+        fetch('/get_previous_guesses').then(response => response.json()).then(jsonned => {
         let prevguesses=jsonned.previous_guesses 
         // previous guesses should be an array
         let newList = "<ol>"
@@ -134,7 +129,7 @@
       }
 
   function playAgain(){
-    let api_url = 'http://cooltexto.nightsky.hackclub.app/generate'; 
+    let api_url = '/generate'; 
  document.getElementById("past_rankings").innerHTML = "";
     document.getElementById("result").innerHTML = "Loading new game! Please wait.";
     document.getElementById("secret_word").innerHTML = ""; 
