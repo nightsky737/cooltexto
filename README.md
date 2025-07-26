@@ -13,7 +13,7 @@
 
 # Demo screenshots:
 <img width="1899" height="1041" alt="Screenshot 2025-07-22 134232" src="https://github.com/user-attachments/assets/0a2e4f64-5eff-493a-9982-71bfed134056" />
-<img width="1567" height="909" alt="Screenshot 2025-07-22 134300" src="https://github.com/user-attachments/assets/0356277f-6bc2-4a3d-aaab-d625bb0f62b2" />
+<img width="1171" height="566" alt="image" src="https://github.com/user-attachments/assets/0f11bfe6-65a6-4e2d-acc1-b193378fabb7" />
 
 These are not all the features, just the most important ones.
 
